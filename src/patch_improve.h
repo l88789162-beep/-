@@ -139,6 +139,24 @@ inline int killer_score_decay(int age, int baseScore)
     float decay = pow(0.82f, age);
     return static_cast<int>(baseScore * decay);
 }
+//分层迭代历史衰减
+inline int iter_hist_decay(int iterAge, int depth, int baseScore);
+//延续历史置换过滤
+inline int cont_hist_filter(uint64_t posKey, int rawContHist);
+//空窗残局开关判定
+inline bool nullmove_enable(int material);
+//吃子分类LMR归约
+inline int capture_lmr_reduction(Move m, int depth, int moveIdx);
+//TT年龄置信计算
+inline float tt_age_weight(int entryAge, int currIter);
+//将军延伸层数限制
+inline int check_ext_limit(int depth, int checkCnt);
+//通路兵动态加权
+inline int passed_pawn_dynamic(Square pawnSq, Square ourKing, Square oppKing);
+//自适应SEE阈值
+inline int see_cutoff_thresh(int materialLeft);
+//LMP动态剪枝阈值
+inline int lmp_dynamic_cut(int depth, int staticEval);
 
 //8. see_endgame_weight：SEE残局权重修正
 inline int see_endgame_weight(int material, int seeVal)
